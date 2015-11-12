@@ -1,0 +1,25 @@
+{
+        "type": "record",
+        "name": "stock_market",
+        "namespace": "com.training.avro",
+        "fields": [{
+                "name": "symbol",
+                "type": "string"
+        },
+        {
+                "name": "company_name",
+                "type": "string"
+        },
+        {
+                "name": "price",
+                "type": "float"
+        },
+        {
+                "name": "volume",
+                "type": "int"
+        },
+        {
+                "name": "date",
+                "type": "string"
+        }]
+}
