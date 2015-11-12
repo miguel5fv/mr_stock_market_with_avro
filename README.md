@@ -19,7 +19,10 @@ java -jar lib/avro-tools-1.7.5.jar fromjson stock_market_prices.json --schema-fi
 hadoop fs -put prices.avro prices.avro
 ```
 
-Then, to execute it you first needs to compile java class:
+Executing
+---------
+
+To execute this development, you firstly need to compile java classes:
 
 `javac -classpath $HADOOP_HOME/hadoop-core.jar:lib/avro-tools-1.7.5.jar:lib/avro-mapred-1.7.5.jar *.java`
 
