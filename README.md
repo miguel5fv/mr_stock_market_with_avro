@@ -8,6 +8,16 @@ I used the Avro Version 1.7.5, and it is usesful because anyone could access to 
 
 The Combiner step could be ommited in this example, but I have decided to use it because I'd like to explore that MapReduce Framework option.
 
+Firstly you have to create the *generated avro code* using this command:
+
+`java -jar avro-tools-1.7.5.jar compile schema stock_market_schema.avsc .`
+
+And then compile the data in JSON format to Avro binary:
+
+```
+java -jar avro-tools-1.7.5.jar fromjson stock_market_prices.json --schema-file stock_market_schema.avsc > prices.avro
+hadoop fs -put prices.avro prices.avro
+```
 
 
 
