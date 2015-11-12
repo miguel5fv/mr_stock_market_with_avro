@@ -10,13 +10,28 @@ The Combiner step could be ommited in this example, but I have decided to use it
 
 Firstly you have to create the *generated avro code* using this command:
 
-`java -jar avro-tools-1.7.5.jar compile schema stock_market_schema.avsc .`
+`java -jar lib/avro-tools-1.7.5.jar compile schema stock_market_schema.avsc .`
 
 And then compile the data in JSON format to Avro binary:
 
 ```
-java -jar avro-tools-1.7.5.jar fromjson stock_market_prices.json --schema-file stock_market_schema.avsc > prices.avro
+java -jar lib/avro-tools-1.7.5.jar fromjson stock_market_prices.json --schema-file stock_market_schema.avsc > prices.avro
 hadoop fs -put prices.avro prices.avro
+```
+
+Then, to execute it you first needs to compile java class:
+
+`javac -classpath $HADOOP_HOME/hadoop-core.jar:lib/avro-tools-1.7.5.jar:lib/avro-mapred-1.7.5.jar *.java`
+
+Pack at them into a JAR file:
+
+`jar cvf StockMarket.jar *.class`
+
+And then add and execute the jar using Hadoop. In this case we use a command called -libsjar where indicate the external libs, like JSON:
+
+```
+export LIBJARS=lib/avro-tools-1.7.5.jar,lib/avro-mapred-1.7.5.jar
+hadoop jar program_count.jar StockMarketDriver libjars ${LIBJARS} prices.avro output
 ```
 
 
